@@ -26,7 +26,7 @@
     db.restaurants.find({"grades.score":{$gt:90}})
 
 9 Escriu una consulta per trobar els restaurants que tenen un score més gran que 80 però menys que 100.
-    db.restaurants.find({"grades.score":{$gt:80,$lt:100}})
+    db.restaurants.find({ "grades": { $elemMatch: { score: { $gt: 80, $lt: 100 } } } })
 
 10 Escriu una consulta per trobar els restaurants que estan situats en una longitud inferior a -95.754168.
     db.restaurants.find({ "address.coord.0": { $lt: -95.754168 } })
@@ -83,7 +83,7 @@
     db.restaurants.find().sort({ cuisine: 1, borough: -1 })
 
 28 Escriu una consulta per saber si les direccions contenen el carrer.
-    db.restaurants.find({ "address.street": { $exists: true } })
+    db.restaurants.find({ "address.street": { $exists: true, $ne: "" } })
 
 29 Escriu una consulta que seleccioni tots els documents en la col·lecció de restaurants on els valors del camp coord és de tipus Double.
     db.restaurants.find({ "address.coord": { $type: "double" } })
